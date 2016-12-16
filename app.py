@@ -21,7 +21,6 @@ username = ""
 mygames={}
 
 maincollection = None
-login_manager = LoginManager()
 
 reload(sys)
 sys.setdefaultencoding('utf-8')
