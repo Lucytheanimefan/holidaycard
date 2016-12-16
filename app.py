@@ -10,8 +10,6 @@ import json
 from JSONEncoder import JSONEncoder
 from login import *
 import json, xmltodict
-import stats
-from stats import *
 
 app = Flask(__name__)
 
