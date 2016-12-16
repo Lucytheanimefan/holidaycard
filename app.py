@@ -15,7 +15,7 @@ app = Flask(__name__)
 
 db = server.get_db()
 
-username = ""
+username = None
 mygames={}
 
 maincollection = None
@@ -23,25 +23,37 @@ maincollection = None
 reload(sys)
 sys.setdefaultencoding('utf-8')
 
+def logged_in():
+	if username is not None:
+		return 1
+	else:
+		return 0
 
 
 @app.route("/")
-@app.route("/home")
 def home():
 	return render_template('login.html')
-
-@app.route("/home")
-def main():
-	return render_template('index.html')
-
 
 @app.route("/")
 @app.route("/login",methods=['POST','GET'])
 def login():
+	print request.json["username"]
 	if open_account(request.json["username"]):
+		print "logged in"
 		return main()
 	else:
+		print "not logged in" 
 		return None
+
+@app.route("/home")
+def main():
+	if logged_in():
+		return render_template('index.html')
+	else:
+		return home()
+
+
+
 
 	#return render_template('index3.html', games = mygames)
 
